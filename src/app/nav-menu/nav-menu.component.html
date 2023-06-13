@@ -1,0 +1,12 @@
+<div
+    class="nav flex-column nav-pills nav-menu text-center" 
+    role="tab-list" 
+    *ngFor="let item of menuItems">
+    <a 
+        class="nav-link"
+        [ngClass]="{'active' : item.active}"
+        (click)="selectItem(item)"
+        role="tab">
+            {{ item.name }}
+    </a>
+</div>
