@@ -1,79 +1,122 @@
-<form>
+<div class="modal-body">
+  <header class="d-flex justify-content-center mt-2">
+    <h4>Register new device</h4>
+  </header>
 
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" 
-            class="form-control my-1" 
-            id="name" 
-            aria-describedby="nameHelp" 
-            placeholder="Enter name">
-    <small id="nameHelp" 
-            class="form-text text-muted">
-              Name of the device
-    </small>
-  </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="price">Price</label>
-    <div class="input-group">
-      <input type="text" 
+  <form class="d-flex flex-column px-3" 
+        [formGroup]="deviceModelForm">
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text"
+              formControlName="name" 
               class="form-control my-1" 
-              id="price" 
-              aria-describedby="priceHelp" 
-              placeholder="Enter price">
-      <div class="input-group-prepend my-1">
-        <span class="input-group-text" 
-              id="inputGroupPrepend">
-                $
-        </span>
+              id="name" 
+              aria-describedby="nameHelp" 
+              placeholder="Enter name">
+      <small id="nameHelp" 
+              class="form-text text-muted">
+                Name of the device
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Select type</label>
+      <select class="form-select"
+              formControlName="type"
+              id="type">
+              <option></option>
+              <option *ngFor="let type of deviceTypes | keyvalue">
+                {{ type.value }}
+              </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <div class="input-group">
+        <input type="text" 
+                formControlName="price"
+                class="form-control my-1" 
+                id="price" 
+                aria-describedby="priceHelp" 
+                placeholder="Enter price">
+        <div class="input-group-prepend my-1">
+          <span class="input-group-text" 
+                id="inputGroupPrepend">
+                  $
+          </span>
+        </div>
+      </div>
+      <small id="priceHelp" 
+              class="form-text text-muted">
+                Price of the device
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl">Image URL</label>
+      <input type="text"
+              formControlName="imageUrl" 
+              class="form-control my-1" 
+              id="imageUrl" 
+              aria-describedby="imageUrlHelp" 
+              placeholder="Enter image url">
+      <small id="imageUrlHelp" 
+              class="form-text text-muted">
+                Image of the device
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="shortDescription">Short description</label>
+      <textarea class="form-control" 
+                formControlName="shortDescription"
+                id="shortDescription" 
+                rows="2">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="longDescription">Long description</label>
+      <textarea class="form-control" 
+                formControlName="longDescription"
+                id="longDescription" 
+                rows="5">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" 
+                type="checkbox"
+                formControlName="available" 
+                id="available">
+        <label class="form-check-label" 
+                for="available">
+                  Is device currently available?
+        </label>
       </div>
     </div>
-    <small id="priceHelp" 
-            class="form-text text-muted">
-              Price of the device
-    </small>
-  </div>
 
-  <div class="form-group">
-    <label for="imageUrl">Image URL</label>
-    <input type="text" 
-            class="form-control my-1" 
-            id="imageUrl" 
-            aria-describedby="imageUrlHelp" 
-            placeholder="Enter image url">
-    <small id="imageUrlHelp" 
-            class="form-text text-muted">
-              Image of the device
-    </small>
-  </div>
+  </form>
 
-  <div class="form-group">
-    <label for="shortDescription">Short description</label>
-    <textarea class="form-control" 
-              id="shortDescription" 
-              rows="2">
-    </textarea>
-  </div>
+  <hr>
 
-  <div class="form-group">
-    <label for="longDescription">Short description</label>
-    <textarea class="form-control" 
-              id="longDescription" 
-              rows="5">
-    </textarea>
-  </div>
+  <footer class="d-flex gap-2 m-3 justify-content-end">
+    <button type="button" 
+            [disabled]="deviceModelForm.invalid"
+            class="btn btn-primary" 
+            (click)="register()">
+              Register
+    </button>
+    <button type="button" 
+            class="btn btn-danger" 
+            (click)="close()">
+              Cancel
+    </button>
+  </footer>
 
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" 
-              type="checkbox" 
-              value="" 
-              id="available">
-      <label class="form-check-label" 
-              for="available">
-        Is device currently available?
-      </label>
-    </div>
-  </div>
-
-</form>
+</div>

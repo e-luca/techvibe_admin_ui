@@ -15,6 +15,9 @@ export class DeviceManagementListComponent {
     ) { }
 
     openAddDeviceModal(): void {
-        this.modalService.open(AddDeviceDialogComponent)
+    this.modalService.open(AddDeviceDialogComponent, {
+        scrollable: true,
+        backdrop: 'static'
+    })
     }
 }
