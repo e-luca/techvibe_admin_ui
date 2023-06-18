@@ -4,6 +4,7 @@ import { DeviceManagementListComponent } from "./device-management-list/device-m
 import { DeviceManagementRoutingModule } from "./device-management-routing.module";
 import { CommonModule } from "@angular/common";
 import { AddDeviceDialogComponent } from "./add-device-dialog/add-device-dialog.component";
+import { DeviceService } from "../services/device.service";
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { AddDeviceDialogComponent } from "./add-device-dialog/add-device-dialog.
         ReactiveFormsModule,
         DeviceManagementRoutingModule
     ],
-    exports: []
+    exports: [],
+    providers: [DeviceService]
 })
 export class DeviceManagementModule { }

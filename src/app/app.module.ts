@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from "@angular/common/http";
+import { DeviceManagementModule } from './device-management/device-management.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,10 @@ import { CommonModule } from '@angular/common';
   imports: [
     BrowserModule,
     CommonModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+
+    DeviceManagementModule
   ],
   providers: [],
   bootstrap: [AppComponent]

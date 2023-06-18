@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { DeviceType } from "src/app/data-models/enum/device-type.enum";
 import { DeviceModification } from "src/app/data-models/model/device-modification.model";
+import { Device } from "src/app/data-models/model/device.model";
+import { DeviceService } from "src/app/services/device.service";
 
 @Component({
     selector: 'app-add-device-dialog',
@@ -16,6 +18,7 @@ export class AddDeviceDialogComponent implements OnInit {
 
     constructor(
         private activeModal: NgbActiveModal,
+        private deviceService: DeviceService,
         private fb: FormBuilder
     ) { 
         this.deviceModelForm = this.fb.group({
@@ -25,7 +28,7 @@ export class AddDeviceDialogComponent implements OnInit {
             imageUrl: new FormControl('', [Validators.required]),
             shortDescription: new FormControl('', [Validators.required]),
             longDescription: new FormControl('', [Validators.required]),
-            available: new FormControl(false)
+            available: new FormControl(true)
         })
     }
 
@@ -34,12 +37,27 @@ export class AddDeviceDialogComponent implements OnInit {
     }
 
     close(): void {
-        this.activeModal.close(false)
+        this.activeModal.close(null)
     }
 
     register(): void {
         if(this.deviceModelForm.invalid) return
 
-        const request = Object.assign(new DeviceModification(), this.deviceModelForm.value)
+        const request: DeviceModification = Object.assign(new DeviceModification(), this.deviceModelForm.value)
+        const typeValue = Array.from(this.deviceTypes.keys()).find(key => this.deviceTypes.get(key) === this.deviceModelForm.get('type')?.value)
+        request.type = typeValue || ''
+
+        this.deviceService.registerDevice(request).subscribe({
+            next: (data) => { this.deviceCreated(data) },
+            error: (error) => { this.handleErrorResponse(error) }
+        })
+    }
+
+    private deviceCreated(data: Device): void {
+        this.activeModal.close(data)
+    }
+
+    private handleErrorResponse(error: any): void {
+
     }
 }
