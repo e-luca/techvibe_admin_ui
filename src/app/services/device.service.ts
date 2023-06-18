@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { DeviceModification } from "../data-models/model/device-modification.model";
 import { Observable } from "rxjs";
 import { Device } from "../data-models/model/device.model";
+import { Page } from "../data-models/model/page.model";
 
 @Injectable()
 export class DeviceService {
@@ -12,6 +13,10 @@ export class DeviceService {
     constructor(
         private http: HttpClient
     ) {}
+
+    getAll(page: number, size: number): Observable<Page<Device>> {
+        return this.http.get<Page<Device>>(this.BASE_URL)
+    }
 
     registerDevice(request: DeviceModification): Observable<Device> {
         return this.http.post<Device>(this.BASE_URL, request)
