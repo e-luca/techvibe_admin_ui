@@ -22,5 +22,19 @@
                 There are currently no devices to display
         </div>
 
+        <ng-container *ngFor="let device of devices">
+            
+            <div class="card col-9">
+                <div class="d-flex align-items-center p-3">
+                    <img [src]="device.imageUrl" class="device-card-img"/>
+                    <span class="col-9 mx-3">
+                        <strong>{{ device.name }}</strong>
+                    </span>
+                    <span class="device-type">{{ device.type }}</span>
+                </div>
+            </div>
+
+        </ng-container>
+
     </main>
 </div>

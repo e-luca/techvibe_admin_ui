@@ -44,5 +44,6 @@ export class DeviceManagementListComponent implements OnInit {
         this.currentPage = data.number
         this.totalPages = data.totalPages
         this.pageSize = data.size
+        this.devices.forEach(device => device.type = device.type.replace('_', ' '))
     }
 }

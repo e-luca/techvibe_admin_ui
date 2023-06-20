@@ -5,6 +5,7 @@ import { DeviceManagementRoutingModule } from "./device-management-routing.modul
 import { CommonModule } from "@angular/common";
 import { AddDeviceDialogComponent } from "./add-device-dialog/add-device-dialog.component";
 import { DeviceService } from "../services/device.service";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { DeviceService } from "../services/device.service";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        NgbModule,
         DeviceManagementRoutingModule
     ],
     exports: [],
