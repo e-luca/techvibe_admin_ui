@@ -18,6 +18,10 @@ export class DeviceService {
         return this.http.get<Page<Device>>(this.BASE_URL)
     }
 
+    getDevice(id: number): Observable<Device> {
+        return this.http.get<Device>(this.BASE_URL + `/${id}`)
+    }
+
     registerDevice(request: DeviceModification): Observable<Device> {
         return this.http.post<Device>(this.BASE_URL, request)
     }

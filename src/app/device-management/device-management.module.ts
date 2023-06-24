@@ -6,11 +6,13 @@ import { CommonModule } from "@angular/common";
 import { AddDeviceDialogComponent } from "./add-device-dialog/add-device-dialog.component";
 import { DeviceService } from "../services/device.service";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { DeviceDetailsComponent } from './device-details/device-details.component';
 
 @NgModule({
     declarations: [
         DeviceManagementListComponent,
-        AddDeviceDialogComponent
+        AddDeviceDialogComponent,
+        DeviceDetailsComponent
     ],
     imports: [
         CommonModule,

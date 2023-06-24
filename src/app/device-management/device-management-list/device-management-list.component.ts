@@ -4,6 +4,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { DeviceService } from "src/app/services/device.service";
 import { Device } from "src/app/data-models/model/device.model";
 import { Page } from "src/app/data-models/model/page.model";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-device-management-list',
@@ -18,7 +19,8 @@ export class DeviceManagementListComponent implements OnInit {
 
     constructor(
         private modalService: NgbModal,
-        private deviceService: DeviceService
+        private deviceService: DeviceService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -30,6 +32,11 @@ export class DeviceManagementListComponent implements OnInit {
         scrollable: true,
         backdrop: 'static'
     })
+    }
+
+    goToDeviceDetails(device: Device): void {
+        if (!device) return
+        this.router.navigate(['device', device.id]).then()
     }
 
     private getAllDevices(page: number): void {

@@ -24,7 +24,8 @@
 
         <ng-container *ngFor="let device of devices">
             
-            <div class="card col-9">
+            <div class="card col-9" 
+                (click)="goToDeviceDetails(device)">
                 <div class="d-flex align-items-center p-3">
                     <img [src]="device.imageUrl" class="device-card-img"/>
                     <span class="col-9 mx-3">

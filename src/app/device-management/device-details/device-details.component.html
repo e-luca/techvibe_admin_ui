@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center">
+    <div class="card">
+
+        <img class="card-img-top" 
+             [src]="device.imageUrl" 
+             alt="Device image">
+    
+        <div class="card-body">
+    
+            <div class="d-flex align-items-baseline">
+                <h5 class="card-title me-2">
+                    {{ device.name }}
+                </h5> 
+                |
+                <p class="ms-2">
+                    {{ device.price }}$
+                </p>
+            </div>
+    
+            <p class="card-text">
+                {{ device.shortDescription }}
+            </p>
+    
+            <p class="card-text">
+                {{ device.longDescription }}
+            </p>
+    
+            <p>Type: {{ device.type }}</p>
+            <p>Available: <em [ngClass]="device.available ? 'bi-check-circle' : 'bi-x-circle'"></em></p>
+        </div>
+    </div>
+</div>
