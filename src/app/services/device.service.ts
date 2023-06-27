@@ -25,4 +25,11 @@ export class DeviceService {
     registerDevice(request: DeviceModification): Observable<Device> {
         return this.http.post<Device>(this.BASE_URL, request)
     }
+
+    uploadCSVFile(file: File): Observable<void> {
+        const formData = new FormData()
+        formData.append('file', file)
+
+        return this.http.post<void>(this.BASE_URL + '/csv', formData)
+    }
 }

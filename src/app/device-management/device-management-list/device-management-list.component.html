@@ -9,9 +9,19 @@
         </button>
 
         <button type="button" 
-                class="btn btn-primary">
+                class="btn btn-primary" 
+                [ngbPopover]="fileInput" 
+                triggers="click" 
+                [autoClose]="'outside'">
                     <i class="bi-file-earmark-spreadsheet"></i>
         </button>
+
+        <ng-template #fileInput>
+            <input type="file"
+            (change)="onFileSelected($event)"
+            class="form-control"
+            accept=".csv">
+        </ng-template>
 
     </header>
 

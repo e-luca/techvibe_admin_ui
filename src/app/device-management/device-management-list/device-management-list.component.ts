@@ -39,6 +39,18 @@ export class DeviceManagementListComponent implements OnInit {
         this.router.navigate(['device', device.id]).then()
     }
 
+    onFileSelected(event: Event): void {
+        const target = event.target as HTMLInputElement
+        const files = target.files as FileList
+        if (!files.length) return
+        const file: File = files[0]
+        
+        this.deviceService.uploadCSVFile(file).subscribe({
+            next: () => this.getAllDevices(this.currentPage),
+            error: (error) => {}
+        })
+    }
+
     private getAllDevices(page: number): void {
         this.deviceService.getAll(page, this.pageSize).subscribe({
             next: (data) => this.handleResponseData(data),
