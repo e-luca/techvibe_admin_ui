@@ -1,6 +1,6 @@
 <div class="modal-body">
   <header class="d-flex justify-content-center mt-2">
-    <h4>Register new device</h4>
+    <h4>{{ editMode ? 'Update device' : 'Register new device' }}</h4>
   </header>
 
   <hr>
@@ -28,7 +28,7 @@
               formControlName="type"
               id="type">
               <option></option>
-              <option *ngFor="let type of deviceTypes | keyvalue">
+              <option *ngFor="let type of deviceTypes | keyvalue" [value]="type.value">
                 {{ type.value }}
               </option>
       </select>
@@ -107,10 +107,10 @@
 
   <footer class="d-flex gap-2 m-3 justify-content-end">
     <button type="button" 
-            [disabled]="deviceModelForm.invalid"
+            [disabled]="deviceModelForm.invalid || !deviceModelForm.touched"
             class="btn btn-primary" 
-            (click)="register()">
-              Register
+            (click)="submit()">
+              {{ editMode ? 'Update' : 'Register' }}
     </button>
     <button type="button" 
             class="btn btn-danger" 

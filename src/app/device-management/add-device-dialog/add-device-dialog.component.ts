@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { DeviceType } from "src/app/data-models/enum/device-type.enum";
@@ -13,8 +13,11 @@ import { DeviceService } from "src/app/services/device.service";
 })
 export class AddDeviceDialogComponent implements OnInit {
     
+    @Input() device = {} as Device
+
     deviceTypes = new Map<string, string>()
     deviceModelForm: FormGroup
+    editMode: boolean = false
 
     constructor(
         private activeModal: NgbActiveModal,
@@ -34,26 +37,38 @@ export class AddDeviceDialogComponent implements OnInit {
 
     ngOnInit(): void {
         Object.keys(DeviceType).forEach((key, index) => this.deviceTypes.set(key, Object.values(DeviceType)[index]))
+        this.editMode = this.device.id !== undefined
+        if (this.editMode) this.loadData()
     }
 
     close(): void {
         this.activeModal.close(null)
     }
 
-    register(): void {
+    submit(): void {
         if(this.deviceModelForm.invalid) return
 
         const request: DeviceModification = Object.assign(new DeviceModification(), this.deviceModelForm.value)
         const typeValue = Array.from(this.deviceTypes.keys()).find(key => this.deviceTypes.get(key) === this.deviceModelForm.get('type')?.value)
         request.type = typeValue || ''
 
-        this.deviceService.registerDevice(request).subscribe({
-            next: (data) => { this.deviceCreated(data) },
+        const action = this.editMode 
+                        ? this.deviceService.updateDevice(this.device.id, request) 
+                        : this.deviceService.registerDevice(request)
+
+        action.subscribe({
+            next: (data) => { this.handleResponse(data) },
             error: (error) => { this.handleErrorResponse(error) }
         })
     }
 
-    private deviceCreated(data: Device): void {
+    private loadData(): void {
+        const deviceObject = { ...this.device }
+        deviceObject.type = this.deviceTypes.get(deviceObject.type.replace(' ', '_')) || ''
+        this.deviceModelForm.patchValue(deviceObject)
+    }
+
+    private handleResponse(data: Device): void {
         this.activeModal.close(data)
     }
 

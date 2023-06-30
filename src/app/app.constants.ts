@@ -5,5 +5,8 @@ import { NavItem } from './nav-menu/model/nav-item.model';
     providedIn: 'root'
 })
 export class AppConstants {
-    public NavMenuItems: NavItem[] = [new NavItem('Device Management', 'device-management', false)]
+    public NavMenuItems: NavItem[] = [
+        new NavItem('Device Management', 'device-management', false),
+        new NavItem('User Management', 'user-management', false)
+    ]
 }

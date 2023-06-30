@@ -32,4 +32,8 @@ export class DeviceService {
 
         return this.http.post<void>(this.BASE_URL + '/csv', formData)
     }
+
+    updateDevice(id: number, request: DeviceModification): Observable<Device> {
+        return this.http.put<Device>(this.BASE_URL + `/${id}`, request)
+    }
 }
