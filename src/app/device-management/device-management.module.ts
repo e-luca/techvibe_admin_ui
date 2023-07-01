@@ -7,11 +7,13 @@ import { AddDeviceDialogComponent } from "./add-device-dialog/add-device-dialog.
 import { DeviceService } from "../services/device.service";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { DeviceDetailsComponent } from './device-details/device-details.component';
+import { DeleteDeviceDialogComponent } from "./delete-device-dialog/delete-device-dialog.component";
 
 @NgModule({
     declarations: [
         DeviceManagementListComponent,
         AddDeviceDialogComponent,
+        DeleteDeviceDialogComponent,
         DeviceDetailsComponent
     ],
     imports: [

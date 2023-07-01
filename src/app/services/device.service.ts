@@ -36,4 +36,8 @@ export class DeviceService {
     updateDevice(id: number, request: DeviceModification): Observable<Device> {
         return this.http.put<Device>(this.BASE_URL + `/${id}`, request)
     }
+
+    deleteDevice(id: number): Observable<Device> {
+        return this.http.delete<Device>(this.BASE_URL + `/${id}`)
+    }
 }

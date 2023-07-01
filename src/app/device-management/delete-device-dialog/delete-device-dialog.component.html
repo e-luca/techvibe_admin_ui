@@ -1,0 +1,28 @@
+<div class="modal-body">
+
+    <header class="d-flex justify-content-center mt-2">
+        <h4>Delete device</h4>
+    </header>
+
+    <hr>
+
+    <div class="my-4">
+        Are you sure you want to delete {{ device.name }} device?
+    </div>
+
+    <footer class="d-flex gap-2 m-3 justify-content-end">
+
+        <button type="button"
+                class="btn btn-danger" 
+                (click)="delete()">
+                  Delete
+        </button>
+
+        <button type="button" 
+                class="btn btn-light" 
+                (click)="cancel()">
+                  Cancel
+        </button>
+
+      </footer>
+</div>
